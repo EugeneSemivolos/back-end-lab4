@@ -9,6 +9,7 @@ COPY . /src
 WORKDIR /src
 
 ENV FLASK_APP=src/__init__
+ENV JWT_SECRET_KEY: "237123387258913088129406613799583093374"
 
 RUN flask db init
 RUN flask db migrate
