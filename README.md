@@ -1,4 +1,4 @@
-# Back-end-lab3
+# Back-end-lab4
 Варіант = 20 % 3 = 2(Користувацькі категорії витрат)
 
 ## Prerequisites
@@ -13,11 +13,11 @@ To get this project up and running, follow these steps:
 
 1. Clone this repository to your local machine:
 
-`git clone https://github.com/vladmoroca/Backend_lab1.git`
+`git clone https://github.com/vladmoroca/Backend_lab4.git`
 
 2. Change to the project directory:
 
-`cd back-end-lab3`
+`cd back-end-lab4`
 
 3. Build the Docker image for the application:
 
