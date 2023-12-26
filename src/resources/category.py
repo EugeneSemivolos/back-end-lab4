@@ -1,5 +1,6 @@
 import uuid
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
 from ..schemas.Schemas import categorySchema
 from sqlalchemy.exc import IntegrityError
 from ..models.category import categoryModel
@@ -8,6 +9,7 @@ from ..db import db
 category_blueprint = Blueprint('category', __name__)
 
 @category_blueprint.get("/category")
+@jwt_required()
 def categories_get():
     user_id = request.args.get('user_id')
     categories_list = categoryModel.query.filter(categoryModel.user_id == user_id).all()
@@ -16,6 +18,7 @@ def categories_get():
     return schema.dump(obj=categories_list, many=True)
 
 @category_blueprint.post("/category")
+@jwt_required()
 def create_category():
     category_data = request.args
     category_schema = categorySchema()
@@ -34,6 +37,7 @@ def create_category():
     return validated_data
 
 @category_blueprint.delete("/category/<category_id>")
+@jwt_required()
 def category_delete(category_id):
     user_id = request.args.get('user_id')
     category = categoryModel.query.get(category_id)

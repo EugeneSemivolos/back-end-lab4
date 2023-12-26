@@ -2,6 +2,7 @@ import datetime
 import json
 import uuid
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
 from ..schemas.Schemas import recordSchema
 from sqlalchemy.exc import IntegrityError
 from ..models import *
@@ -10,6 +11,7 @@ from ..db import db
 record_blueprint = Blueprint('record', __name__)
 
 @record_blueprint.post("/record")
+@jwt_required()
 def create_record():
     record_data = request.args
     record_schema = recordSchema()
@@ -39,6 +41,7 @@ def create_record():
     return validated_data
 
 @record_blueprint.get("/record")
+@jwt_required()
 def get_records():
     user_id = request.args.get("user_id")
     category_id = request.args.get("category_id")
@@ -58,6 +61,7 @@ def get_records():
     return record_schema.dump(records_list, many=True)
 
 @record_blueprint.delete("/record/<record_id>")
+@jwt_required()
 def record_delete(record_id):
     record = recordModel.query.get(record_id)
     if record:
